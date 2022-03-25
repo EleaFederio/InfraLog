@@ -2,40 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EngineerCollection;
+use App\Http\Resources\EngineerResource;
 use App\Models\Engineer;
 use Illuminate\Http\Request;
+
 
 class EngineerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Engineer[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
      */
     public function index()
     {
-        //
+//        $projects = ;
+        return EngineerResource::collection(Engineer::all());
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+       //
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'middle_name' => ''
+        ]);
+        Engineer::create($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Added!'
+        ]);
     }
 
     /**

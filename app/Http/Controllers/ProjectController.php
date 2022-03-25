@@ -10,11 +10,12 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Project[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+        return $projects;
     }
 
     /**
@@ -31,11 +32,20 @@ class ProjectController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'project_id' => 'required',
+            'amount' => 'required',
+            'details' => 'required',
+        ]);
+        Project::create($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Product successfully added!'
+        ]);
     }
 
     /**

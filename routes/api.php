@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\ProjectController;
+use \App\Http\Controllers\EngineerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+$apiVersion = 'v1';
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('/'.$apiVersion.'/projects', ProjectController::class);
+Route::apiResource('/'.$apiVersion.'/engineer', EngineerController::class);

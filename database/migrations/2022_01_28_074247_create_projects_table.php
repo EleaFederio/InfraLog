@@ -8,6 +8,8 @@ class CreateProjectsTable extends Migration
 {
     /**
      * Run the migrations.
+     * ProjectEngineer and Project Inspector, temporary data type is int
+     *  - to relate it to Engineers table via engineers.id
      *
      * @return void
      */
@@ -17,16 +19,22 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('project_id');
             $table->decimal('amount',15,2);
-            $table->foreignId('project_status_id')->constrained();
+//            $table->foreignId('project_status_id')->constrained();
             // *************** Classification must be in relation with Classification Table ***************
-            $table->text('details');
-            $table->string('contractor');
-            $table->foreignId('project_engineer_id')->constrained();
-            $table->foreignId('project_inspector_id')->constrained();
+            $table->text('details')->nullable();
+            $table->string('contractor')->nullable();
+            // This is Just alternative solution
+            $table->integer('project_engineer')->nullable();
+            $table->integer('project_inspector')->nullable();
+            
+            // ***** BIDDING ***** //
+            $table->date('pre_bid')->nullable();
+            $table->date('opening_of_bids')->nullable();
+
             // Project Engineer and Project Inspector must be in-relation to Engineer Table
-            $table->date('start_date');
-            $table->date('original_completion_date');
-            $table->date('revised_completion_date');
+            $table->date('start_date')->nullable();
+            $table->date('original_completion_date')->nullable();
+            $table->date('revised_completion_date')->nullable();
             $table->timestamps();
             // *************** Project Images - One to Many ***************
             // Pre-Bid must be in relation to Prebid table - One to Many
