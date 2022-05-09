@@ -56,10 +56,10 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $projectData = Project::find($id);
+        $rojectDetails = Project::find($id);
         return response()->json([
             'success' => true,
-            'data' => $projectData
+            'details' => $rojectDetails
         ]);
     }
 
