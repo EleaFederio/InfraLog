@@ -96,4 +96,8 @@ class ProjectController extends Controller
     {
         //
     }
+
+    public function test(){
+        echo asset('storage/file.txt');
+    }
 }
