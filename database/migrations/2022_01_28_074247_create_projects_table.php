@@ -25,8 +25,8 @@ class CreateProjectsTable extends Migration
             $table->text('details')->nullable();
             $table->string('contractor')->nullable();
             // This is Just alternative solution
-            $table->bigInteger('inspector')->foreignkeyFor(Engineer::class);
-            $table->bigInteger('engineer')->foreignkeyFor(Engineer::class);
+            $table->bigInteger('project_inspector')->foreignkeyFor(Engineer::class)->constrained();
+            $table->bigInteger('project_engineer')->foreignkeyFor(Engineer::class);
 
             // Project Engineer and Project Inspector must be in-relation to Engineer Table
             $table->date('start_date')->nullable();
