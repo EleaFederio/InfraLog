@@ -21,4 +21,8 @@ class Project extends Model
         'original_completion_date',
         'revised_completion_date'
     ];
+
+    public function engineer(){
+        return $this->belongsTo(Engineer::class);
+    }
 }

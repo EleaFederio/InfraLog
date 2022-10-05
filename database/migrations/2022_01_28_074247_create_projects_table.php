@@ -25,9 +25,9 @@ class CreateProjectsTable extends Migration
             $table->text('details')->nullable();
             $table->string('contractor')->nullable();
             // This is Just alternative solution
-            $table->unsignedBigInteger('project_inspector_id');
+            $table->unsignedBigInteger('project_inspector_id')->nullable();
             $table->foreign('project_inspector_id')->references('id')->on('engineers')->onDelete('cascade');
-            $table->unsignedBigInteger('project_engineer_id');
+            $table->unsignedBigInteger('project_engineer_id')->nullable();
             $table->foreign('project_engineer_id')->references('id')->on('engineers')->onDelete('cascade');
 
             // Project Engineer and Project Inspector must be in-relation to Engineer Table

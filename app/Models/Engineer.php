@@ -10,4 +10,8 @@ class Engineer extends Model
     use HasFactory;
 
     protected $fillable = ['first_name', 'last_name', 'middle_name'];
+
+    public function projects(){
+        return $this->hasMany(Project::class);
+    }
 }
