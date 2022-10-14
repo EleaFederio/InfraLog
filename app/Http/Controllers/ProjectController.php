@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProjectInfoResource;
 
 class ProjectController extends Controller
 {
@@ -56,10 +57,15 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $rojectDetails = Project::find($id);
+        if($projectDetails = Project::find($id)){
+            return response()->json([
+                'success' => true,
+                'details' => new ProjectInfoResource($projectDetails)
+            ]);
+        }
         return response()->json([
-            'success' => true,
-            'details' => $rojectDetails
+            'success' => false,
+            'message' => 'Project not found!'
         ]);
     }
 
@@ -94,7 +100,13 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        // return $project;
+        $project = Project::find($project->id);
+        $project->delete();
+        return response()->json([
+            'success' => true,
+            'details' => "project deleted successfuly"
+        ]);
     }
 
     public function test(){

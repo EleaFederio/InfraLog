@@ -22,7 +22,11 @@ class Project extends Model
         'revised_completion_date'
     ];
 
-    public function engineer(){
+    public function project_engineer(){
+        return $this->belongsTo(Engineer::class);
+    }
+
+    public function project_inspector(){
         return $this->belongsTo(Engineer::class);
     }
 }
