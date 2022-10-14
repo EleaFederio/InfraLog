@@ -24,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('/'.$apiVersion.'/projects', ProjectController::class);
 Route::apiResource('/'.$apiVersion.'/engineer', EngineerController::class);
+
+Route::get('/link', [ProjectController::class, 'test']);
