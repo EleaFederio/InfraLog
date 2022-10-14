@@ -101,11 +101,16 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         // return $project;
-        $project = Project::find($project->id);
-        $project->delete();
+        if($project = Project::find($project->id)){
+            $project->delete();
+            return response()->json([
+                'success' => true,
+                'details' => "project deleted successfuly"
+            ]);
+        }
         return response()->json([
-            'success' => true,
-            'details' => "project deleted successfuly"
+            'success' => false,
+            'message' => "Project not found!"
         ]);
     }
 

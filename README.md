@@ -1,12 +1,11 @@
-#InFraNews Manager
+# InfaLog
 
-## Back-End of InfraPrrojectUI
+##### News Item Monitoring and Organizing System
 
-#### Projects API Endpoints
-* Show * Projects => (GET) 'http://app.domain/api/v1/engineer'
-* Add Project => (GET)'http://app.domain/api/v1/engineer'
-  * data -> [project_id, amount, details] 
+&nbsp;
+&nbsp;
+&nbsp;
 
-#### Documentation
 
-https://documenter.getpostman.com/view/17455584/2s83zpHfSa
+
+[View API Documentation](https://documenter.getpostman.com/view/17455584/2s83zpHfSa)

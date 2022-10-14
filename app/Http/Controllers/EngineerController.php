@@ -59,7 +59,11 @@ class EngineerController extends Controller
      */
     public function show(Engineer $engineer)
     {
-        //
+        $selectedEngineer = Engineer::find($engineer->id);
+        return response()->json([
+            'success' => true,
+            'engineer' => new EngineerResource($selectedEngineer)
+        ]);
     }
 
     /**
@@ -93,6 +97,16 @@ class EngineerController extends Controller
      */
     public function destroy(Engineer $engineer)
     {
-        //
+        if($engineer = Engineer::find($engineer->id)){
+            $engineer->delete();
+            return response()->json([
+                'success' => true,
+                'details' => "engineer data deleted successfuly"
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => "Project not found!"
+        ]);
     }
 }
