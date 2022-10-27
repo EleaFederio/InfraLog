@@ -1,6 +1,12 @@
 # InfaLog
 
 ##### News Item Monitoring and Organizing System
+&nbsp;
+
+### InfraLog + features
+* Automated announcement of Bidding for Infrastructure Projects.
+* Automated announcement of office activities.
+
 
 &nbsp;
 &nbsp;
