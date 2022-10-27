@@ -4,8 +4,9 @@
 &nbsp;
 
 ### InfraLog + features
-* Automated announcement of Bidding for Infrastructure Projects.
-* Automated announcement of office activities.
+* Automated Announcement
+    * Automated announcement of Bidding for Infrastructure Projects.
+    * Automated announcement of office activities.
 
 
 &nbsp;
