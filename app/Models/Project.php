@@ -29,4 +29,8 @@ class Project extends Model
     public function project_inspector(){
         return $this->belongsTo(Engineer::class);
     }
+
+    public function bidding(){
+        return $this->belongsToMany(Bidding::class);
+    }
 }

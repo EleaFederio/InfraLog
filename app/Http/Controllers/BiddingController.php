@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bidding;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class BiddingController extends Controller
@@ -14,7 +15,8 @@ class BiddingController extends Controller
      */
     public function index()
     {
-        //
+        $bidding = Bidding::all();
+        echo $bidding;
     }
 
     /**
@@ -35,7 +37,20 @@ class BiddingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bidding = new Bidding;
+        $project = Project::find($request->project_id);
+
+        $bidding->pre_bid = $request->pre_bid_conference;
+        $bidding->opening_of_bids = $request->opening_of_bids;
+        $bidding->start_of_posting = $request->start_of_posting;
+        $bidding->end_of_posting = $request->end_of_posting;
+        $bidding->save();
+
+        $project->bidding()->attach($bidding->id);
+        // echo 'Hahaha';
+   
+        // $bidding->save();
+        
     }
 
     /**

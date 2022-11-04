@@ -13,7 +13,7 @@ class BiddingProject extends Migration
      */
     public function up()
     {
-        Schema::create('bidding_projects', function (Blueprint $table) {
+        Schema::create('bidding_project', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bidding_id')->constrained();
             $table->foreignId('project_id')->constrained();

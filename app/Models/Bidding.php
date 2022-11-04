@@ -11,7 +11,12 @@ class Bidding extends Model
 
     protected $fillable = ['pre_bid', 'opening_of_bids', 'start_of_posting', 'end_of_posting'];
 
+    // public function projects(){
+    //     return $this->hasMany(Project::class);
+    // }
+
     public function projects(){
-        return $this->hasMany(Project::class);
+        return $this->belongsToMany(Project::class);
     }
+    
 }

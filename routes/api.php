@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProjectController;
 use \App\Http\Controllers\EngineerController;
 use \App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\BiddingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/'.$apiVersion.'/projects', ProjectController::class);
 Route::apiResource('/'.$apiVersion.'/engineer', EngineerController::class);
 Route::apiResource('/'.$apiVersion.'/announcements', AnnouncementController::class);
+Route::apiResource('/'.$apiVersion.'/bidding', BiddingController::class);
 
 Route::get('/link', [ProjectController::class, 'test']);
