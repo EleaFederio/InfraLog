@@ -24,9 +24,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/'.$apiVersion.'/projects', ProjectController::class);
-Route::apiResource('/'.$apiVersion.'/engineer', EngineerController::class);
-Route::apiResource('/'.$apiVersion.'/announcements', AnnouncementController::class);
-Route::apiResource('/'.$apiVersion.'/bidding', BiddingController::class);
+Route::group(['prefix' => $apiVersion], function () {
+    Route::apiResource('engineers', EngineerController::class);
 
-Route::get('/link', [ProjectController::class, 'test']);
+    Route::apiResource('projects', ProjectController::class);
+    Route::post('projects/image/upload', [ProjectController::class, 'infraImageUpload']);
+    Route::get('infra/image', [ProjectController::class, 'infraImage']);
+
+    Route::apiResource('announcements', AnnouncementController::class);
+    Route::apiResource('biddings', BiddingController::class);
+});
+
+// Route::apiResource('/'.$apiVersion.'/projects', ProjectController::class);
+// Route::apiResource('/'.$apiVersion.'/engineer', EngineerController::class);
+// Route::apiResource('/'.$apiVersion.'/announcements', AnnouncementController::class);
+// Route::apiResource('/'.$apiVersion.'/bidding', BiddingController::class);
+
+

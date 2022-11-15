@@ -2,7 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\ProjectInfoResource;
 
 class ProjectController extends Controller
@@ -64,7 +66,7 @@ class ProjectController extends Controller
         }
         return response()->json([
             'success' => false,
-            'message' => 'Project not found!'
+            'message' => 'Project not found!x'
         ]);
     }
 
@@ -109,11 +111,38 @@ class ProjectController extends Controller
         }
         return response()->json([
             'success' => false,
-            'message' => "Project not found!"
+            'message' => "Project deletion error!"
         ]);
     }
 
-    public function test(){
-        echo asset('storage/file.txt');
+    public function infraImage(Request $request){
+        $infraImages = Image::all();
+
+        $projectsImages = [];
+        foreach($infraImages as $infraImage){
+            array_push($projectsImages, [
+                'image_url' => Storage::url($infraImage->image_path),
+                'data' => $infraImage->projects
+            ]);
+        }
+
+
+        return $projectsImages;
     }
-}
+
+    public function infraImageUpload(Request $request){
+        $request->validate([
+            'project_id' => 'required',
+            'infra_image' => 'required|image'
+        ]);
+        $path = Storage::putFile('public', $request->file('infra_image'));
+        $project = Project::where('project_id', $request->project_id)->first();
+        $image = Image::create(['image_path' => $path]);
+        $image->projects()->attach($project->id);
+        return response()->json([
+            'success' => true,
+            'message' => "Image upload success!"
+        ]);
+    }
+    
+} 
