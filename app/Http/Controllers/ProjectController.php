@@ -121,7 +121,7 @@ class ProjectController extends Controller
         $projectsImages = [];
         foreach($infraImages as $infraImage){
             array_push($projectsImages, [
-                'image_url' => Storage::url($infraImage->image_path),
+                'image_url' => asset(Storage::url($infraImage->image_path)),
                 'data' => $infraImage->projects
             ]);
         }
