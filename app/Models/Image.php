@@ -15,7 +15,10 @@ class Image extends Model
     use HasFactory;
 
     public function projects(){
-        // return $this->belongsTo(Project::class, 'images_projects', 'image_id', 'project_id');
         return $this->belongsToMany(Project::class);
+    }
+
+    public function activities(){
+        return $this->belongsToMany(Activity::class);
     }
 }

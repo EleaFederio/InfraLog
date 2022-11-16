@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\ProjectController;
@@ -25,14 +26,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => $apiVersion], function () {
-    Route::apiResource('engineers', EngineerController::class);
+    Route::apiResource('engineer', EngineerController::class);
 
     Route::apiResource('projects', ProjectController::class);
     Route::post('projects/image/upload', [ProjectController::class, 'infraImageUpload']);
     Route::get('infra/image', [ProjectController::class, 'infraImage']);
+    Route::post('infra/image/multi_upload', [ProjectController::class, 'multiImageUpload']);
 
     Route::apiResource('announcements', AnnouncementController::class);
     Route::apiResource('biddings', BiddingController::class);
+
+    Route::apiResource('activities', ActivityController::class);
+    Route::post('activities/image/upload', [ActivityController::class, 'upload']);
+    Route::get('activity/galery', [ActivityController::class, 'galery']);
 });
 
 // Route::apiResource('/'.$apiVersion.'/projects', ProjectController::class);

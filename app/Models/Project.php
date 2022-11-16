@@ -35,7 +35,6 @@ class Project extends Model
     }
 
     public function images(){
-        // return $this->belongsTo(Image::class, 'images_projects', 'project_id', 'image_id');
         return $this->belongsToMany(Image::class);
     }
 }

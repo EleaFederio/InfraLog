@@ -130,12 +130,35 @@ class ProjectController extends Controller
         return $projectsImages;
     }
 
+    public function multiImageUpload(Request $request){
+
+        
+        $request->validate([
+            'project_id' => 'required',
+            'infra_images.*' => 'required:array:image'
+        ]);
+
+        $project = Project::where('project_id', $request->project_id)->first();
+        $images = [];
+
+        foreach($request->infra_images as $infraImage){
+            $path = Storage::putFile('public/contract/' . $request->project_id, $infraImage);
+            $image = Image::create(['image_path' => $path]);
+            array_push($images, $image->id);
+        }
+        $project->images()->attach($images);
+        return response()->json([
+            'success' => true,
+            'message' => "Image/s successfuly uploaded!"
+        ]);
+    }
+
     public function infraImageUpload(Request $request){
         $request->validate([
             'project_id' => 'required',
             'infra_image' => 'required|image'
         ]);
-        $path = Storage::putFile('public', $request->file('infra_image'));
+        $path = Storage::putFile('public/contract/' . $request->project_id, $request->file('infra_image'));
         $project = Project::where('project_id', $request->project_id)->first();
         $image = Image::create(['image_path' => $path]);
         $image->projects()->attach($project->id);
