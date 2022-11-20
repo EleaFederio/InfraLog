@@ -26,7 +26,8 @@ class ProjectInfoResource extends JsonResource
             'project_engineer_id' => new EngineerResource(Engineer::find($this->project_engineer_id)),
             'start_date' => $this->start_date,
             'original_completion_date' => $this->original_completion_date,
-            'revised_completion_date' => $this->revised_completion_date
+            'revised_completion_date' => $this->revised_completion_date,
+            'photos' => InfraPhotoResource::collection($this->images),
         ];
     }
 }
