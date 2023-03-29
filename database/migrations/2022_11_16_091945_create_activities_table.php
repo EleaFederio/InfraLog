@@ -17,6 +17,7 @@ class CreateActivitiesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
+            $table->date('date')->default(DB::raw('NOW()'));
             $table->timestamps();
         });
     }

@@ -40,7 +40,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'project_id' => 'required',
-            'amount' => 'required',
+            'approved_budget' => 'required',
             'details' => 'required',
         ]);
         Project::create($request->all());

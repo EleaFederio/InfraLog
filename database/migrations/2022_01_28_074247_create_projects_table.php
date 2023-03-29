@@ -19,7 +19,8 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('project_id');
-            $table->decimal('amount',15,2);
+            $table->decimal('approved_budget',15,2);
+            $table->decimal('awarded_contract_cost',15,2);
 //            $table->foreignId('project_status_id')->constrained();
             // *************** Classification must be in relation with Classification Table ***************
             $table->text('details')->nullable();
@@ -34,6 +35,13 @@ class CreateProjectsTable extends Migration
             $table->date('start_date')->nullable();
             $table->date('original_completion_date')->nullable();
             $table->date('revised_completion_date')->nullable();
+
+            //location
+            $table->string('minicipality');
+            $table->string('barangay');
+            $table->double('lat')->nullable();
+            $table->double('lng')->nullable();
+
             $table->timestamps();
 
             // *************** Project Images - One to Many ***************
